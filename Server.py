@@ -87,6 +87,7 @@ class ServerListen(threading.Thread):
                             x = i
                     if (receivedMessage == 'mute'):
                         win32api.keybd_event(self.VK_VOLUME_MUTE, self.hwcode7)
+                    break;
             except Exception:
                 traceback.print_exc(file=sys.stdout)
                 break;
