@@ -78,9 +78,13 @@ class ServerListen(threading.Thread):
                     if (receivedMessage == 'stop'):
                         win32api.keybd_event(self.VK_MEDIA_STOP, self.hwcode4)
                     if (receivedMessage == 'volup'):
-                        win32api.keybd_event(self.VK_VOLUME_UP, self.hwcode5)
+                        for i in range(0,15):
+                            win32api.keybd_event(self.VK_VOLUME_UP, self.hwcode5)
+                            x = i
                     if (receivedMessage == 'voldown'):
-                        win32api.keybd_event(self.VK_VOLUME_DOWN, self.hwcode6)
+                        for i in range(0,15):
+                            win32api.keybd_event(self.VK_VOLUME_DOWN, self.hwcode6)
+                            x = i
                     if (receivedMessage == 'mute'):
                         win32api.keybd_event(self.VK_VOLUME_MUTE, self.hwcode7)
             except Exception:
