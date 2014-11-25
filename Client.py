@@ -17,8 +17,12 @@ class Client:
     def sendMessage(self, text):
         try:
             nachricht = text
-            print(nachricht)
             self.s.send(bytes(nachricht))
+            while(True):
+                receivedMessage = self.s.recv(1024).decode("utf-8")
+                if receivedMessage:
+                    print(receivedMessage + "<br>")
+                    break;
         finally:
             self.s.close()
 
@@ -29,3 +33,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+

@@ -1,8 +1,9 @@
 import socket
 import threading
 import win32api
+from pytify import Spotify
 import traceback, sys
-
+import time
 
 class Server:
     s = socket.socket()
@@ -87,6 +88,12 @@ class ServerListen(threading.Thread):
                             x = i
                     if (receivedMessage == 'mute'):
                         win32api.keybd_event(self.VK_VOLUME_MUTE, self.hwcode7)
+                    time.sleep(0.5)
+                    spotify = Spotify()
+                    songInfo = spotify.getCurrentTrack()
+                    songInfo += ' Artist: ' + spotify.getCurrentArtist()
+                    print(songInfo)
+                    self.c.send(bytes(songInfo))
                     break;
             except Exception:
                 traceback.print_exc(file=sys.stdout)
