@@ -91,9 +91,11 @@ class ServerListen(threading.Thread):
                     time.sleep(0.5)
                     spotify = Spotify()
                     songInfo = spotify.getCurrentTrack()
-                    songInfo += ' Artist: ' + spotify.getCurrentArtist()
-                    print(songInfo)
-                    self.c.send(bytes(songInfo))
+                    if songInfo:
+                        songInfo += ' Artist: ' + spotify.getCurrentArtist()
+                        print(songInfo)
+                        self.c.send(bytes(songInfo))
+                    self.c.send(bytes('Error gettin SongInfo'))
                     break;
             except Exception:
                 traceback.print_exc(file=sys.stdout)
