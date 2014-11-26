@@ -1,6 +1,11 @@
+
+
 <html>
 
 <?php
+if ($_GET['info']) {
+  echo exec("python Client.py info");
+}
 if ($_GET['next']) {
   echo exec("python Client.py next");
 }
@@ -29,9 +34,12 @@ if ($_GET['mute']) {
 <a href="?prev=true"><img src="image/prev.png"/></a>
 <a href="?pause=true"><img src="image/pause.png"/></a>
 <a href="?next=true"><img src="image/for.png"/></a>
-<a href="?stop=true"><img src="image/stop.png"/></a>
+<a href="?stop=true"><img src="image/stop.png"/></a><br>
 <a href="?voldown=true"><img src="image/vol_down.png"/></a>
 <a href="?volup=true"><img src="image/vol_up.png"/></a>
-<a href="?mute=true"><img src="image/mute.png"/></a>
+<a href="?mute=true"><img src="image/mute.png"/></a><br>
+<a href="?info=true"><img src="image/info.png"/></a>
 </body>
 </html>
+
+                           [ 41 Zeilen geschrieben ]
