@@ -25,7 +25,7 @@ if ($_GET['mute']) {
 ?>
 
 
-<body bgcolor="#222326">
+<body bgcolor="#222326" text="#FFFFFF">
 <a href="?prev=true"><img src="image/prev.png"/></a>
 <a href="?pause=true"><img src="image/pause.png"/></a>
 <a href="?next=true"><img src="image/for.png"/></a>
