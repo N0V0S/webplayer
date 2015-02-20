@@ -29,7 +29,7 @@ class Client:
 def main():
     client = Client()
     client.connect()
-    client.sendMessage(str(sys.argv[1]))
+    client.sendMessage(str(sys.argv[1] + " " + sys.argv[2]))
 
 if __name__ == '__main__':
     main()

@@ -67,33 +67,33 @@ class ServerListen(threading.Thread):
         while True:
             try:
                 receivedMessage = self.c.recv(1024).decode("utf-8")
+                print(receivedMessage + "\n")
                 if receivedMessage:
                     Server.getnachrichten(Server).append(receivedMessage)        
-                    print(receivedMessage)
-                    if (receivedMessage == 'next'):
+                    if ('next' in receivedMessage):
                         win32api.keybd_event(self.VK_MEDIA_NEXT_TRACK, self.hwcode1)
-                    if (receivedMessage == 'prev'):
+                    if ('prev' in receivedMessage):
                         win32api.keybd_event(self.VK_MEDIA_PREV_TRACK, self.hwcode3)
-                    if (receivedMessage == 'pause'):
+                    if ('pause' in receivedMessage):
                         win32api.keybd_event(self.VK_MEDIA_PLAY_PAUSE, self.hwcode2)
-                    if (receivedMessage == 'stop'):
+                    if ('stop' in receivedMessage):
                         win32api.keybd_event(self.VK_MEDIA_STOP, self.hwcode4)
-                    if (receivedMessage == 'volup'):
+                    if ('volup' in receivedMessage):
                         for i in range(0,15):
                             win32api.keybd_event(self.VK_VOLUME_UP, self.hwcode5)
                             x = i
-                    if (receivedMessage == 'voldown'):
+                    if ('voldown' in receivedMessage):
                         for i in range(0,15):
                             win32api.keybd_event(self.VK_VOLUME_DOWN, self.hwcode6)
                             x = i
-                    if (receivedMessage == 'mute'):
+                    if ('mute' in receivedMessage):
                         win32api.keybd_event(self.VK_VOLUME_MUTE, self.hwcode7)
                     time.sleep(0.5)
                     spotify = Spotify()
                     songInfo = spotify.getCurrentTrack()
                     if songInfo:
                         songInfo += ', Artist: ' + spotify.getCurrentArtist()
-                        print(songInfo)
+                        print(songInfo + "\n")
                         self.c.send(bytes(songInfo))
                         break;
                     self.c.send(bytes('Error gettin SongInfo'))
