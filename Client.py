@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import socket
 import sys
+import datetime
 
 class Client:
     s = socket.socket()
@@ -29,7 +30,7 @@ class Client:
 def main():
     client = Client()
     client.connect()
-    client.sendMessage(str(sys.argv[1] + " " + sys.argv[2]))
+    client.sendMessage(str(sys.argv[1] + " " + sys.argv[2] + " \n" + datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 
 if __name__ == '__main__':
     main()
