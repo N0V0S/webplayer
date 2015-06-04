@@ -5,9 +5,6 @@ import win32gui
 from pytify import Spotify
 import traceback, sys
 import time
-from PIL import ImageGrab
-import os
-import shutil
 
 
 class Server:
@@ -105,14 +102,6 @@ class ServerListen(threading.Thread):
                     if ('mute' in receivedMessage):
                         win32api.keybd_event(self.VK_VOLUME_MUTE, self.hwcode7)
                     time.sleep(0.5)
-                    ## screenshot spotify
-                    if(self.spotify_rect):
-                        box = (self.spotify_rect[0], self.spotify_rect[1], self.spotify_rect[2], self.spotify_rect[3])
-                        im = ImageGrab.grab(box)
-                        if (os.path.exists("\\\\192.168.0.101\\Share\\asd\\current_song.png")):
-                            os.remove("\\\\192.168.0.101\\Share\\asd\\current_song.png")
-                        im.save(os.getcwd() +'\sharedFiles\current_song' + '.png', 'PNG')
-                        shutil.move(os.getcwd() +'\sharedFiles\current_song.png', "\\\\192.168.0.101\\Share\\asd")
                     spotify = Spotify()
                     songInfo = spotify.getCurrentTrack()
                     if songInfo:
