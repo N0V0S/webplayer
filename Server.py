@@ -1,9 +1,14 @@
 import socket
 import threading
 import win32api
+import win32gui
 from pytify import Spotify
 import traceback, sys
 import time
+from PIL import ImageGrab
+import os
+import shutil
+
 
 class Server:
     s = socket.socket()
@@ -48,11 +53,22 @@ class ServerListen(threading.Thread):
     VK_MEDIA_STOP = 0xB2
     VK_MEDIA_PLAY_PAUSE = 0xB3
 
+    # spotify Instance vars
+    hwnd = None
+    # spotify rect
+    spotify_rect = None
     
     def __init__(self, connection):
         threading.Thread.__init__(self)
         print("new thread")
         self.c = connection
+
+        try:
+            self.hwnd = win32gui.FindWindow("SpotifyMainWindow", None)
+            self.spotify_rect = win32gui.GetWindowRect(self.hwnd)
+        except:
+            raise self.SpotifyWindowNotFoundException()
+        
 
         ##--- Virtual Key Codes
         hwcode1 = win32api.MapVirtualKey(self.VK_MEDIA_NEXT_TRACK, 0)
@@ -89,6 +105,14 @@ class ServerListen(threading.Thread):
                     if ('mute' in receivedMessage):
                         win32api.keybd_event(self.VK_VOLUME_MUTE, self.hwcode7)
                     time.sleep(0.5)
+                    ## screenshot spotify
+                    if(self.spotify_rect):
+                        box = (self.spotify_rect[0], self.spotify_rect[1], self.spotify_rect[2], self.spotify_rect[3])
+                        im = ImageGrab.grab(box)
+                        if (os.path.exists("\\\\192.168.0.101\\Share\\asd\\current_song.png")):
+                            os.remove("\\\\192.168.0.101\\Share\\asd\\current_song.png")
+                        im.save(os.getcwd() +'\sharedFiles\current_song' + '.png', 'PNG')
+                        shutil.move(os.getcwd() +'\sharedFiles\current_song.png', "\\\\192.168.0.101\\Share\\asd")
                     spotify = Spotify()
                     songInfo = spotify.getCurrentTrack()
                     if songInfo:

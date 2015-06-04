@@ -4,28 +4,28 @@
 
 <?php
 if ($_GET['info']) {
-  echo exec("python Client.py info " . $_SERVER["REMOTE_ADDR"]));
+  echo( exec("python Client.py info " . $_SERVER["REMOTE_ADDR"]));
 }
 if ($_GET['next']) {
-  echo exec("python Client.py next" . $_SERVER["REMOTE_ADDR"]));
+  echo( exec("python Client.py next" . $_SERVER["REMOTE_ADDR"]));
 }
 if ($_GET['prev']) {
-  echo exec("python Client.py prev" . $_SERVER["REMOTE_ADDR"]));
+  echo( exec("python Client.py prev" . $_SERVER["REMOTE_ADDR"]));
 }
 if ($_GET['pause']) {
-  echo exec("python Client.py pause" . $_SERVER["REMOTE_ADDR"]));
+  echo( exec("python Client.py pause" . $_SERVER["REMOTE_ADDR"]));
 }
 if ($_GET['stop']) {
-  echo exec("python Client.py stop" . $_SERVER["REMOTE_ADDR"]));
+  echo( exec("python Client.py stop" . $_SERVER["REMOTE_ADDR"]));
 }
 if ($_GET['volup']) {
-  echo exec("python Client.py volup" . $_SERVER["REMOTE_ADDR"]));
+  echo( exec("python Client.py volup" . $_SERVER["REMOTE_ADDR"]));
 }
 if ($_GET['voldown']) {
-  echo exec("python Client.py voldown" . $_SERVER["REMOTE_ADDR"]));
+  echo( exec("python Client.py voldown" . $_SERVER["REMOTE_ADDR"]));
 }
 if ($_GET['mute']) {
-  echo exec("python Client.py mute" . $_SERVER["REMOTE_ADDR"]));
+  echo( exec("python Client.py mute" . $_SERVER["REMOTE_ADDR"]));
 }
 ?>
 
